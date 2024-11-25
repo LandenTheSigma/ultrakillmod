@@ -1,9 +1,16 @@
 package com.ULTRAKILLMOD;
 
+import com.ULTRAKILLMOD.Client.SoundHandler;
+import com.ULTRAKILLMOD.init.EntityRegistry;
+import com.ULTRAKILLMOD.init.ItemRegistry;
+import net.minecraft.ResourceLocationException;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
-
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -21,23 +28,15 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 @Mod(ULTRAKILLMOD.MODID)
 public class ULTRAKILLMOD {
     public static final String MODID = "ultrakillmod";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public ULTRAKILLMOD(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
-
-        // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        ItemRegistry.register(modEventBus);
+        SoundHandler.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -46,7 +45,12 @@ public class ULTRAKILLMOD {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
+        if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.COMBAT) {
+            event.accept(ItemRegistry.REVOLVER);
+        }
+        if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.OP_BLOCKS) {
+            event.accept(ItemRegistry.COIN);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -62,5 +66,12 @@ public class ULTRAKILLMOD {
         public static void onClientSetup(FMLClientSetupEvent event) {
 
         }
+    }
+
+
+
+    @SubscribeEvent
+    public void onEntityFall(LivingFallEvent event) {
+        event.setDistance(0.0F);
     }
 }
