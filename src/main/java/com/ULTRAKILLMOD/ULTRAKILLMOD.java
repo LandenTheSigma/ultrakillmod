@@ -1,12 +1,19 @@
 package com.ULTRAKILLMOD;
 
 import com.ULTRAKILLMOD.Client.SoundHandler;
+import com.ULTRAKILLMOD.init.Entities.EntityEvents;
+import com.ULTRAKILLMOD.init.Entities.EntityTypes;
+import com.ULTRAKILLMOD.init.Entities.Renderers.FleshPrisonRenderer;
 import com.ULTRAKILLMOD.init.EntityRegistry;
 import com.ULTRAKILLMOD.init.ItemRegistry;
 import net.minecraft.ResourceLocationException;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import org.slf4j.Logger;
 
@@ -23,6 +30,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import software.bernie.geckolib.GeckoLib;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ULTRAKILLMOD.MODID)
@@ -37,6 +45,8 @@ public class ULTRAKILLMOD {
 
         ItemRegistry.register(modEventBus);
         SoundHandler.register(modEventBus);
+        EntityRegistry.register(modEventBus);
+        EntityTypes.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -64,7 +74,7 @@ public class ULTRAKILLMOD {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            EntityRenderers.register(EntityTypes.FLESH_PRISON, FleshPrisonRenderer::new);
         }
     }
 
