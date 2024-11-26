@@ -15,7 +15,11 @@ public class EntityRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, ULTRAKILLMOD.MODID);
 
-    public static final DeferredHolder<EntityType<?>, EntityType<FleshPrison>> FLESH_PRISON = ENTITY_TYPES.register("flesh_prison", () -> EntityType.Builder.of(FleshPrison::new, MobCategory.MONSTER).sized(1f, 1f).build("flesh_prison"));
+    public static final DeferredHolder<EntityType<?>, EntityType<FleshPrison>> FLESH_PRISON =
+            ENTITY_TYPES.register("flesh_prison",
+                    () -> EntityType.Builder.of(FleshPrison::new, MobCategory.MONSTER)
+                            .sized(1f, 1f)
+                            .build("flesh_prison"));
 
     public static void register(IEventBus bus) {
         ENTITY_TYPES.register(bus);

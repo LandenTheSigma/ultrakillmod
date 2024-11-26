@@ -8,7 +8,8 @@ import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class FleshPrisonRenderer extends GeoEntityRenderer<FleshPrison> {
-    public FleshPrisonRenderer(EntityRendererProvider.Context context, GeoModel<FleshPrison> model) {
-        super(context,model);
+    public FleshPrisonRenderer(EntityRendererProvider.Context context) {
+        super(context, new FleshPrisonModel()); // Pass the model directly here
     }
 }
+

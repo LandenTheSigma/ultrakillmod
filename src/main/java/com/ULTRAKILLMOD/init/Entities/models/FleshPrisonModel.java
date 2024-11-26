@@ -3,9 +3,12 @@ package com.ULTRAKILLMOD.init.Entities.models;
 import com.ULTRAKILLMOD.ULTRAKILLMOD;
 import com.ULTRAKILLMOD.init.Entities.FleshPrison;
 import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.animatable.GeoAnimatable;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.model.GeoModel;
 
-public class FleshPrisonModel extends GeoModel<FleshPrison> {
+public class FleshPrisonModel extends GeoModel<FleshPrison>  {
     public static final ResourceLocation model = ResourceLocation.tryBuild(ULTRAKILLMOD.MODID, "geo/flesh_prison.bbmodel");
     public static final ResourceLocation texture = ResourceLocation.tryBuild(ULTRAKILLMOD.MODID, "textures/flesh_prison.png");
     public static final ResourceLocation animations = ResourceLocation.tryBuild(ULTRAKILLMOD.MODID, "animations/flesh_prison_idle_animation.json");
