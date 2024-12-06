@@ -35,6 +35,7 @@ repositories {
             includeGroup("software.bernie.geckolib")
         }
     }
+
 }
 
 neoForge {
@@ -123,6 +124,7 @@ configurations {
 
 dependencies {
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+    implementation files('libs/aaa_particles-1.20.1-1.4.8-forge.jar')
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"

@@ -1,4 +1,13 @@
 {
   "item.ultrakillmod.coin": "Coin",
-  "item.ultrakillmod.revolver": "Revolver"
+  "item.ultrakillmod.revolver": "Revolver",
+  "item.ultrakillmod.shotgun": "Shotgun",
+  "item.ultrakillmod.railcannon": "Rail Cannon",
+  "item.ultrakillmod.rocket_launcher": "Rocket Launcher",
+  "item.ultrakillmod.nailgun": "Nailgun",
+
+  "creativetab.ultrakillmod.ultrakill_weapons": "Ultrakill Weapons",
+
+  "block.ultrakillmod.terminal_lower": "Terminal Lower",
+  "block.ultrakillmod.terminal_upper": "Terminal Upper"
 }

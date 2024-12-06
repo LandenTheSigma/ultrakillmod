@@ -1,19 +1,20 @@
 package com.ULTRAKILLMOD;
 
-import com.ULTRAKILLMOD.Client.SoundHandler;
-import com.ULTRAKILLMOD.init.Entities.EntityEvents;
-import com.ULTRAKILLMOD.init.Entities.EntityTypes;
-import com.ULTRAKILLMOD.init.Entities.Renderers.FleshPrisonRenderer;
-import com.ULTRAKILLMOD.init.EntityRegistry;
+import com.ULTRAKILLMOD.Client.Keybinds;
+import com.ULTRAKILLMOD.Client.handler.VFXHandler;
+import com.ULTRAKILLMOD.init.BlockRegistry;
+import com.ULTRAKILLMOD.init.CreativeModeTabs;
+import com.ULTRAKILLMOD.init.Entities.Entities;
+import com.ULTRAKILLMOD.init.Entities.client.FleshPrisonRenderer;
+import com.ULTRAKILLMOD.init.Entities.client.MinosPrimeRenderer;
 import com.ULTRAKILLMOD.init.ItemRegistry;
-import net.minecraft.ResourceLocationException;
-import net.minecraft.client.renderer.entity.EntityRenderer;
+import com.ULTRAKILLMOD.init.Items.SoundRegistry;
+import com.ULTRAKILLMOD.init.UltrakillmodTitleScreen;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.neoforged.neoforge.common.Tags;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import org.slf4j.Logger;
 
@@ -24,15 +25,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import software.bernie.geckolib.GeckoLib;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ULTRAKILLMOD.MODID)
 public class ULTRAKILLMOD {
     public static final String MODID = "ultrakillmod";
@@ -44,9 +42,10 @@ public class ULTRAKILLMOD {
         modEventBus.addListener(this::addCreative);
 
         ItemRegistry.register(modEventBus);
-        SoundHandler.register(modEventBus);
-        EntityRegistry.register(modEventBus);
-        EntityTypes.register(modEventBus);
+        SoundRegistry.register(modEventBus);
+        Entities.register(modEventBus);
+        CreativeModeTabs.register(modEventBus);
+        BlockRegistry.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -74,14 +73,21 @@ public class ULTRAKILLMOD {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            EntityRenderers.register(EntityTypes.FLESH_PRISON, FleshPrisonRenderer::new);
+            EntityRenderers.register(Entities.FLESH_PRISON.get(), FleshPrisonRenderer::new);
+            EntityRenderers.register(Entities.MINOS_PRIME.get(), MinosPrimeRenderer::new);
+        }
+    }
+    private static boolean firstScreenShown = false;
+    @SubscribeEvent
+    public void ClientTickEvent(ClientTickEvent.Pre event) {
+        if (!firstScreenShown) {
+            firstScreenShown=true;
+            Minecraft.getInstance().setScreen(new UltrakillmodTitleScreen());
         }
     }
 
-
-
     @SubscribeEvent
     public void onEntityFall(LivingFallEvent event) {
-        event.setDistance(0.0F);
+
     }
 }

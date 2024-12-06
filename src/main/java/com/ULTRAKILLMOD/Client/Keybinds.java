@@ -45,4 +45,18 @@ public class Keybinds {
             InputConstants.getKey(InputConstants.KEY_Z, -1),
             CATAGORY
     );
+
+    public final KeyMapping ItemDisplayMenu = new KeyMapping(
+            "key." + ULTRAKILLMOD.MODID + ".ITEM_MENU",
+            KeyConflictContext.IN_GAME,
+            InputConstants.getKey(InputConstants.KEY_H, -1),
+            CATAGORY
+    );
+
+    public final KeyMapping CHARGEWEAPON = new KeyMapping(
+            "key." + ULTRAKILLMOD.MODID + ".CHARGE_WEAPON",
+            KeyConflictContext.IN_GAME,
+            InputConstants.getKey(InputConstants.MOUSE_BUTTON_RIGHT, -1),
+            CATAGORY
+    );
 }

@@ -1,0 +1,50 @@
+{
+  "parry": {
+    "subtitle": "sounds.ultrakillmod.parry",
+    "sounds": [
+      "ultrakillmod:parry"
+    ]
+  },
+  "minos_spawn": {
+    "subtitle": "sounds.ultrakillmod.minos_spawn",
+    "sounds": [
+      "ultrakillmod:minos_spawn"
+    ]
+  },
+  "minos_death": {
+    "subtitle": "sounds.ultrakillmod.minos_death",
+    "sounds": [
+      "ultrakillmod:minos_death"
+    ]
+  },
+  "minos_crush": {
+    "subtitle": "sounds.ultrakillmod.minos_crush",
+    "sounds": [
+      "ultrakillmod:minos_crush"
+    ]
+  },
+  "minos_judgement": {
+    "subtitle": "sounds.ultrakillmod.minos_judgement",
+    "sounds": [
+      "ultrakillmod:minos_judgement"
+    ]
+  },
+  "minos_prepare_thyself": {
+    "subtitle": "sounds.ultrakillmod.minos_prepare_thyself",
+    "sounds": [
+      "ultrakillmod:minos_prepare_thyself"
+    ]
+  },
+  "minos_thyendisnow": {
+    "subtitle": "sounds.ultrakillmod.minos_thyendisnow",
+    "sounds": [
+      "ultrakillmod:minos_thyendisnow"
+    ]
+  },
+  "minos_useless": {
+    "subtitle": "sounds.ultrakillmod.minos_useless",
+    "sounds": [
+      "ultrakillmod:minos_useless"
+    ]
+  }
+}
